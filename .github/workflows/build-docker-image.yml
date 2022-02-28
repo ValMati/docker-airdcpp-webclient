@@ -13,7 +13,7 @@ jobs:
         id: airdcpp-release
         run: |
           release_version=$(curl -sL https://api.github.com/repos/airdcpp-web/airdcpp-webclient/releases/latest | jq -r ".tag_name")
-          echo ::set-output name=num_rels_found::$(curl -s "https://hub.docker.com/v2/repositories/gangefors/airdcpp-webclient/tags/?page_size=10&ordering=last_updated" | jq '.results[].name' | grep -c "${release_version}")
+          echo ::set-output name=num_rels_found::$(curl -s "https://hub.docker.com/v2/repositories/valmati/airdcpp-webclient/tags/?page_size=10&ordering=last_updated" | jq '.results[].name' | grep -c "${release_version}")
           echo ::set-output name=release_tag::${release_version}
       -
         if: ${{ steps.airdcpp-release.outputs.num_rels_found == 0 }}
@@ -28,7 +28,7 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
-          username: gangefors
+          username: valmati
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       -
         if: ${{ steps.airdcpp-release.outputs.num_rels_found == 0 }}
@@ -40,5 +40,5 @@ jobs:
           no-cache: true
           push: true
           tags: |
-            gangefors/airdcpp-webclient:latest
-            gangefors/airdcpp-webclient:${{ steps.airdcpp-release.outputs.release_tag }}
+            valmati/airdcpp-webclient:latest
+            valmati/airdcpp-webclient:${{ steps.airdcpp-release.outputs.release_tag }}
