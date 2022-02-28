@@ -25,7 +25,7 @@ jobs:
         name: Set up QEMU
         uses: docker/setup-qemu-action@master
         with:
-        platforms: linux/arm/v7
+          platforms: linux/arm/v7
 
       -
         if: ${{ steps.airdcpp-release.outputs.num_rels_found == 0 }}
