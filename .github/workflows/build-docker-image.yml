@@ -38,6 +38,7 @@ jobs:
         with:
           context: .
           no-cache: true
+          platforms: linux/arm/v7
           push: true
           tags: |
             valmati/airdcpp-webclient:latest
