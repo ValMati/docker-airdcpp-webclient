@@ -19,6 +19,14 @@ jobs:
         if: ${{ steps.airdcpp-release.outputs.num_rels_found == 0 }}
         name: Checkout
         uses: actions/checkout@v2
+
+      -
+        if: ${{ steps.airdcpp-release.outputs.num_rels_found == 0 }}
+        name: Set up QEMU
+        uses: docker/setup-qemu-action@master
+        with:
+        platforms: linux/arm/v7
+
       -
         if: ${{ steps.airdcpp-release.outputs.num_rels_found == 0 }}
         name: Set up Docker Buildx
